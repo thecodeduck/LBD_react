@@ -13,7 +13,7 @@ setup:
 ## run - attempt run webpack-dev-server
 ##
 run:
-	webpack-dev-server --content-base src --inline --hot
+	npm run dev
 
 ##	tests - run all tests
 ##	test NAME=name - run single test, searches thru 'describe' suite
