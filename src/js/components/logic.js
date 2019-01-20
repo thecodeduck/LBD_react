@@ -6,7 +6,7 @@ function genCode(a) {
 	const result = [];
 	let i = 0;
 	while (i < 4) {
-		result.push(_.random(0, a.size, false));
+		result.push(_.random(1, a.size, false));
 		i++;
 	}
 	return result;
