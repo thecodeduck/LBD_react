@@ -30,6 +30,8 @@
     "babel-preset-stage-0": "^6.3.13",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-plugin-html": "^5.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
@@ -38,6 +40,7 @@
     "webpack-dev-server": "2.9.7"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
     "react": "^0.14.6",
     "react-dom": "^0.14.6"

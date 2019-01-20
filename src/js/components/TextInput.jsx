@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 class ControlledTextInput extends React.Component {
 	constructor(props) {
@@ -47,6 +48,7 @@ ControlledTextInput.propTypes = {
 	placeholder: PropTypes.string,
 	disabled: PropTypes.bool,
 	value: PropTypes.string,
+	id: PropTypes.string,
 	onChange: PropTypes.func,
 };
 
@@ -55,5 +57,56 @@ ControlledTextInput.defaultProps = {
 	placeholder: null,
 	disabled: false,
 	value: '',
+	id: _.uniqueID(),
 	onChange: (newValue, oldValue) => console.log(`ControlledTextInput.defaultProps.onChange ${newValue} ${oldValue}`),
+};
+
+class UncontrolledTextInput extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			value: props.value,
+		};
+		this.onChangeWrapper = this.onChangeWrapper.bind(this);
+	}
+
+	onChangeWrapper(newValue, oldValue) {
+		const { onChange } = this.props;
+		this.setState({ value: newValue }, () => onChange(newValue, oldValue));
+	}
+
+	render() {
+		const { value } = this.state;
+		const { onChangeWrapper } = this;
+
+		const controlledProps = {
+			...this.props,
+			value,
+			onChange: onChangeWrapper,
+		};
+		return (<ControlledTextInput {...controlledProps} />);
+	}
+}
+
+UncontrolledTextInput.propTypes = {
+	label: PropTypes.string,
+	placeholder: PropTypes.string,
+	disabled: PropTypes.bool,
+	value: PropTypes.string,
+	id: PropTypes.string,
+	onChange: PropTypes.func,
+};
+
+UncontrolledTextInput.defaultProps = {
+	label: null,
+	placeholder: null,
+	disabled: false,
+	value: '',
+	id: _.uniqueID(),
+	onChange: (newValue, oldValue) => console.log(`ControlledTextInput.defaultProps.onChange ${newValue} ${oldValue}`),
+};
+
+export {
+	ControlledTextInput as Controlled,
+	UncontrolledTextInput as Uncontrolled,
 };

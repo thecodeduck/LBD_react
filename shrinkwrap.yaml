@@ -1,4 +1,5 @@
 dependencies:
+  lodash: 4.17.11
   prop-types: 15.6.2
   react: 0.14.9
   react-dom: 0.14.9
@@ -16,6 +17,8 @@ devDependencies:
   babel-preset-stage-0: 6.24.1
   eslint: 3.19.0
   eslint-config-airbnb: 14.1.0
+  eslint-import-resolver-node: 0.3.2
+  eslint-plugin-html: 5.0.0
   eslint-plugin-import: 2.14.0
   eslint-plugin-jsx-a11y: 4.0.0
   eslint-plugin-react: 6.10.3
@@ -2347,6 +2350,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==
+  /dom-serializer/0.1.0:
+    dependencies:
+      domelementtype: 1.1.3
+      entities: 1.1.2
+    dev: true
+    resolution:
+      integrity: sha1-BzxpdUbOB4DOI75KKOKT5AvDDII=
   /dom-walk/0.1.1:
     dev: true
     resolution:
@@ -2358,6 +2368,27 @@ packages:
       npm: '>=1.2'
     resolution:
       integrity: sha512-jnjyiM6eRyZl2H+W8Q/zLMA481hzi0eszAaBUzIVnmYVDBbnLxVNnfu1HgEBvCbL+71FrxMl3E6lpKH7Ge3OXA==
+  /domelementtype/1.1.3:
+    dev: true
+    resolution:
+      integrity: sha1-vSh3PiZCiBrsUVRJJCmcXNgiGFs=
+  /domelementtype/1.3.1:
+    dev: true
+    resolution:
+      integrity: sha512-BSKB+TSpMpFI/HOxCNr1O8aMOTZ8hT3pM3GQ0w/mWRmkhEDSFJkkyzz4XQsBV44BChwGkrDfMyjVD0eA2aFV3w==
+  /domhandler/2.4.2:
+    dependencies:
+      domelementtype: 1.3.1
+    dev: true
+    resolution:
+      integrity: sha512-JiK04h0Ht5u/80fdLMCEmV4zkNh2BcoMFBmZ/91WtYZ8qVXSKjiw7fXMgFPnHcSZgOo3XdinHvmnDUeMf5R4wA==
+  /domutils/1.7.0:
+    dependencies:
+      dom-serializer: 0.1.0
+      domelementtype: 1.3.1
+    dev: true
+    resolution:
+      integrity: sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg==
   /duplexer3/0.1.4:
     dev: true
     resolution:
@@ -2462,6 +2493,10 @@ packages:
       node: '>=6.9.0'
     resolution:
       integrity: sha512-F/7vkyTtyc/llOIn8oWclcB25KdRaiPBpZYDgJHgh/UHtpgT2p2eldQgtQnLtUvfMKPKxbRaQM/hHkvLHt1Vng==
+  /entities/1.1.2:
+    dev: true
+    resolution:
+      integrity: sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
   /envify/3.4.1:
     dependencies:
       jstransform: 11.0.3
@@ -2635,6 +2670,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-snA2LNiLGkitMIl2zn+lTphBF0Y=
+  /eslint-plugin-html/5.0.0:
+    dependencies:
+      htmlparser2: 3.10.0
+    dev: true
+    resolution:
+      integrity: sha512-f7p/7YQdgQUFVAX3nB4dnMQbrDeTalcA01PDhuvTLk0ZadCwM4Pb+639SRuqEf1zMkIxckLY+ckCr0hVP5zl6A==
   /eslint-plugin-import/2.14.0:
     dependencies:
       contains-path: 0.1.0
@@ -3725,6 +3766,17 @@ packages:
       '0': node >= 0.4.0
     resolution:
       integrity: sha1-DfKTUfByEWNRXfueVUPl9u7VFi8=
+  /htmlparser2/3.10.0:
+    dependencies:
+      domelementtype: 1.3.1
+      domhandler: 2.4.2
+      domutils: 1.7.0
+      entities: 1.1.2
+      inherits: 2.0.3
+      readable-stream: 3.1.1
+    dev: true
+    resolution:
+      integrity: sha512-J1nEUGv+MkXS0weHNWVKJJ+UrLfePxRWpN3C9bEi9fLxL2+ggW94DQvgYVXsaT30PGwYRIZKNZXuyMhp3Di4bQ==
   /http-cache-semantics/3.8.1:
     dev: true
     resolution:
@@ -4696,7 +4748,6 @@ packages:
     resolution:
       integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=
   /lodash/4.17.11:
-    dev: true
     resolution:
       integrity: sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
   /log-symbols/1.0.2:
@@ -5995,6 +6046,16 @@ packages:
     dev: true
     resolution:
       integrity: sha512-tQtKA9WIAhBF3+VLAseyMqZeBjW0AHJoxOtYqSUZNJxauErmLbVm2FW1y+J/YA9dUrAC39ITejlZWhVIwawkKw==
+  /readable-stream/3.1.1:
+    dependencies:
+      inherits: 2.0.3
+      string_decoder: 1.2.0
+      util-deprecate: 1.0.2
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-DkN66hPyqDhnIQ6Jcsvx9bFjhw214O4poMBcIMgPVpQvNy9a0e0Uhg5SqySyDKAmUlwt8LonTBz1ezOnM8pUdA==
   /readdirp/2.2.1:
     dependencies:
       graceful-fs: 4.1.15
@@ -7822,9 +7883,12 @@ specifiers:
   babel-preset-stage-0: ^6.3.13
   eslint: ^3.19.0
   eslint-config-airbnb: ^14.1.0
+  eslint-import-resolver-node: ^0.3.2
+  eslint-plugin-html: ^5.0.0
   eslint-plugin-import: ^2.2.0
   eslint-plugin-jsx-a11y: ^4.0.0
   eslint-plugin-react: ^6.10.3
+  lodash: ^4.17.11
   prop-types: ^15.6.2
   react: ^0.14.6
   react-dom: ^0.14.6
