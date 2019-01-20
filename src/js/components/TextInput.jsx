@@ -6,7 +6,12 @@ class ControlledTextInput extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onChangeWrapper = this.onChangeWrapper.bind(this);
+
+		this.state = {
+			htmlID: _.uniqueId(),
+		};
 	}
+
 	onChangeWrapper(event) {
 		const { onChange, value } = this.props;
 		onChange(event.target.value, value);
@@ -18,7 +23,6 @@ class ControlledTextInput extends React.Component {
 			placeholder,
 			disabled,
 			value,
-			id,
 		} = this.props;
 
 		const inputView = (
@@ -26,12 +30,12 @@ class ControlledTextInput extends React.Component {
 				placeholder={placeholder}
 				disabled={disabled}
 				value={value}
-				id={id}
+				id={this.state.htmlID}
 				onChange={this.onChangeWrapper}
 				/>
 		);
 		const labelView = label != null ? (
-			<label htmlFor={id}>
+			<label htmlFor={this.state.htmlID}>
 				{ label }
 			</label>) : null;
 		return (
@@ -48,7 +52,6 @@ ControlledTextInput.propTypes = {
 	placeholder: PropTypes.string,
 	disabled: PropTypes.bool,
 	value: PropTypes.string,
-	id: PropTypes.string,
 	onChange: PropTypes.func,
 };
 
@@ -57,7 +60,6 @@ ControlledTextInput.defaultProps = {
 	placeholder: null,
 	disabled: false,
 	value: '',
-	id: _.uniqueID(),
 	onChange: (newValue, oldValue) => console.log(`ControlledTextInput.defaultProps.onChange ${newValue} ${oldValue}`),
 };
 
@@ -93,7 +95,6 @@ UncontrolledTextInput.propTypes = {
 	placeholder: PropTypes.string,
 	disabled: PropTypes.bool,
 	value: PropTypes.string,
-	id: PropTypes.string,
 	onChange: PropTypes.func,
 };
 
@@ -102,7 +103,6 @@ UncontrolledTextInput.defaultProps = {
 	placeholder: null,
 	disabled: false,
 	value: '',
-	id: _.uniqueID(),
 	onChange: (newValue, oldValue) => console.log(`ControlledTextInput.defaultProps.onChange ${newValue} ${oldValue}`),
 };
 
