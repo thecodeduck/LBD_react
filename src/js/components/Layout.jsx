@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from './Button';
-import { code, checkCode } from './logic';
+import { set0, code, checkCode } from './logic';
 
 
 // const UserInput = require('./UserInput').default;
@@ -47,7 +47,7 @@ export default class Layout extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2> {this.state.code} </h2>
+				<h2> Your number choices are: {set0} </h2>
 				{this.state.history.map(this.renderHistory)}
 				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} />
 				<Button label="Check me!" onClick={this.onClick} />
