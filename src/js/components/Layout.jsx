@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from './Button';
-import { code } from './logic';
+import { code, checkCode } from './logic';
 
 
 // const UserInput = require('./UserInput').default;
@@ -19,7 +19,6 @@ export default class Layout extends React.Component {
 
 		this.onClick = this.onClick.bind(this);
 		this.onUserInputChange = this.onUserInputChange.bind(this);
-		this.renderHistory = this.renderHistory.bind(this);
 	}
 
 	onUserInputChange(newUserInput) {
@@ -29,7 +28,11 @@ export default class Layout extends React.Component {
 
 	onClick() {
 		const result = this.state.history.slice();
-		result.push(Object.values(this.state.userinput));
+		const current = [];
+		current.push(Object.values(this.state.userinput));
+		current.push(' ');
+		current.push(checkCode(this.state.userinput, code));
+		result.push(current);
 		this.setState({ userinput: {}, history: result });
 	}
 
