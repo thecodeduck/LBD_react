@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Controlled } from './TextInput';
-import Button from './Button';
-import { set0 } from './logic';
-
-const isValidNumber = (number) => set0.has(number);
+import { setList } from './logic';
 
 class UserInput extends React.Component {
 	constructor(props) {
@@ -15,10 +12,14 @@ class UserInput extends React.Component {
 		this.onInput2Change = this.onInput2Change.bind(this);
 		this.onInput3Change = this.onInput3Change.bind(this);
 		this.onInput4Change = this.onInput4Change.bind(this);
+		this.isValidNumber = this.isValidNumber.bind(this);
 	}
 
 	onInput1Change(newValue) {
-		newValue = isValidNumber(newValue) ? String(newValue) : '';
+		// newValue = this.isValidNumber(newValue) ? String(newValue) : '';
+		console.log( typeof newValue);
+
+		newValue = Number.isInteger(newValue) ? String(newValue) : '';
 		const oldUserInputValue = this.props.value;
 		const newUserInputValue = {
 			input1: newValue,
@@ -30,7 +31,7 @@ class UserInput extends React.Component {
 	}
 
 	onInput2Change(newValue) {
-		newValue = isValidNumber(newValue) ? String(newValue) : '';
+		newValue = this.isValidNumber(newValue) ? String(newValue) : '';
 		const oldUserInputValue = this.props.value;
 		const newUserInputValue = {
 			input1: oldUserInputValue.input1,
@@ -41,7 +42,7 @@ class UserInput extends React.Component {
 		this.props.onChange(newUserInputValue, oldUserInputValue);
 	}
 	onInput3Change(newValue) {
-		newValue = isValidNumber(newValue) ? String(newValue) : '';
+		newValue = this.isValidNumber(newValue) ? String(newValue) : '';
 		const oldUserInputValue = this.props.value;
 		const newUserInputValue = {
 			input1: oldUserInputValue.input1,
@@ -52,7 +53,7 @@ class UserInput extends React.Component {
 		this.props.onChange(newUserInputValue, oldUserInputValue);
 	}
 	onInput4Change(newValue) {
-		newValue = isValidNumber(newValue) ? String(newValue) : '';
+		newValue = this.isValidNumber(newValue) ? String(newValue) : '';
 		const oldUserInputValue = this.props.value;
 		const newUserInputValue = {
 			input1: oldUserInputValue.input1,
@@ -61,6 +62,18 @@ class UserInput extends React.Component {
 			input4: newValue,
 		};
 		this.props.onChange(newUserInputValue, oldUserInputValue);
+	}
+
+	isValidNumberOLD(n) {
+		const wins = this.props.wins;
+		console.log(wins);
+		const check = wins < 60 ? (Math.floor(wins / 10)) : 6;
+		console.log(check);
+		return setList[check].has(n);
+	}
+
+	isValidNumber(n) {
+		return Number.isInteger(n);
 	}
 
 	render() {
@@ -85,6 +98,7 @@ UserInput.propTypes = {
 		input4: PropTypes.string,
 	}),
 	onChange: PropTypes.func,
+	wins: PropTypes.number,
 };
 
 UserInput.defaultProps = {
@@ -95,6 +109,7 @@ UserInput.defaultProps = {
 		input4: null,
 	},
 	onChange: (newUserInputValue, oldUserInputValue) => console.log('UserInput Change', newUserInputValue, oldUserInputValue),
+	wins: 0,
 };
 
 export default UserInput;

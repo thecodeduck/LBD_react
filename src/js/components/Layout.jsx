@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from './Button';
-import { set0, code, checkCode } from './logic';
+import { setList, genCode, checkCode } from './logic';
 
 
 // const UserInput = require('./UserInput').default;
@@ -13,11 +14,11 @@ export default class Layout extends React.Component {
 		super(props);
 		this.state = {
 			userinput: {},
-			code,
 			history: [],
+			wins: 0,
+			code: genCode(setList),
 		};
-
-		this.onClick = this.onClick.bind(this);
+		this.onCheckClick = this.onCheckClick.bind(this);
 		this.onUserInputChange = this.onUserInputChange.bind(this);
 	}
 
@@ -26,12 +27,15 @@ export default class Layout extends React.Component {
 		console.log('onChange newUserInput', newUserInput);
 	}
 
-	onClick() {
+	onCheckClick() {
 		const result = this.state.history.slice();
-		const current = [];
+		let current = [];
 		current.push(Object.values(this.state.userinput));
 		current.push(' ');
-		current.push(checkCode(this.state.userinput, code));
+		current.push(checkCode(this.state.userinput, this.state.code));
+		if (checkCode(this.state.userinput, this.state.code) === 'HURRAY') {
+			this.setState({ code: genCode(setList[1]), wins: this.state.wins + 1 });
+		}
 		result.push(current);
 		this.setState({ userinput: {}, history: result });
 	}
@@ -47,11 +51,21 @@ export default class Layout extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2> Your number choices are: {set0} </h2>
+				<h2> Your number choices are: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </h2>
+					<h2> {this.state.code} </h2>
+					<h2> Wins: {this.state.wins} </h2>
 				{this.state.history.map(this.renderHistory)}
-				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} />
-				<Button label="Check me!" onClick={this.onClick} />
+				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} />
+				<Button label="Check me!" onClick={this.onCheckClick} />
 			</div>
 		);
 	}
 }
+
+Layout.propTypes = {
+	win: PropTypes.number,
+};
+
+Layout.defaultProps = {
+	win: 0,
+};
