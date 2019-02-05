@@ -19,18 +19,23 @@ class ControlledTextInput extends React.Component {
 
 	render() {
 		const {
+			name,
 			label,
 			placeholder,
 			disabled,
 			value,
+			autoFocus,
 		} = this.props;
 
 		const inputView = (
 			<input
+				name={name}
+				type="text"
 				placeholder={placeholder}
 				disabled={disabled}
 				value={value}
 				id={this.state.htmlID}
+				autoFocus={autoFocus}
 				onChange={this.onChangeWrapper}
 				/>
 		);
@@ -48,10 +53,12 @@ class ControlledTextInput extends React.Component {
 }
 
 ControlledTextInput.propTypes = {
+	name: PropTypes.string,
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
 	disabled: PropTypes.bool,
 	value: PropTypes.string,
+	autoFocus: PropTypes.bool,
 	onChange: PropTypes.func,
 };
 

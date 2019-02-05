@@ -18,6 +18,7 @@ export default class Layout extends React.Component {
 			wins: 0,
 			code: genCode(setList),
 		};
+		this.textInput = React.createRef();
 		this.onCheckClick = this.onCheckClick.bind(this);
 		this.onUserInputChange = this.onUserInputChange.bind(this);
 	}
@@ -38,6 +39,7 @@ export default class Layout extends React.Component {
 		}
 		result.push(current);
 		this.setState({ userinput: {}, history: result });
+		this.textInput.focus();
 	}
 
 	renderHistory(arr, i) {
@@ -55,7 +57,7 @@ export default class Layout extends React.Component {
 					<h2> {this.state.code} </h2>
 					<h2> Wins: {this.state.wins} </h2>
 				{this.state.history.map(this.renderHistory)}
-				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} />
+				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} ref={this.textInputTop} />
 					<Button label="Check me!" onClick={this.onCheckClick} />
 			</div>
 		);

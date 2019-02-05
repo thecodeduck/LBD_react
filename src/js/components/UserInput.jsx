@@ -7,7 +7,7 @@ import { setList } from './logic';
 class UserInput extends React.Component {
 	constructor(props) {
 		super(props);
-
+		this.textInput = React.createRef();
 		this.onInput1Change = this.onInput1Change.bind(this);
 		this.onInput2Change = this.onInput2Change.bind(this);
 		this.onInput3Change = this.onInput3Change.bind(this);
@@ -61,14 +61,14 @@ class UserInput extends React.Component {
 		this.props.onChange(newUserInputValue, oldUserInputValue);
 	}
 
+	focusTextInput() {
+		this.textInput.current.focus();
+	}
+
 	isValidNumber(n) {
 		const wins = this.props.wins;
 		const current = wins < 60 ? (Math.floor(wins / 10)) : 6;
 		return n < setList[current].length + 1; // 10 points to type coercion
-	}
-
-	isValidNumberTEMP(n) {
-		return n;
 	}
 
 	render() {
@@ -76,7 +76,7 @@ class UserInput extends React.Component {
 
 		return (
 			<div>
-				<Controlled value={value.input1} onChange={this.onInput1Change} />
+				<Controlled value={value.input1} onChange={this.onInput1Change} autoFocus ref={this.textInput} />
 				<Controlled value={value.input2} onChange={this.onInput2Change} />
 				<Controlled value={value.input3} onChange={this.onInput3Change} />
 				<Controlled value={value.input4} onChange={this.onInput4Change} />
