@@ -1,18 +1,22 @@
 import _ from 'lodash';
 
-const setList = [ new Set([ '1', '2', '3' ]),
-	new Set([ '1', '2', '3', '4' ]),
-	new Set([ '1', '2', '3', '4', '5' ]),
-	new Set([ '1', '2', '3', '4', '5', '6' ]) ];
+let wins = 0;
 
-function genCode(arr, wins) {
+const setList = [
+	[ '1', '2', '3' ],
+	[ '1', '2', '3', '4' ],
+	[ '1', '2', '3', '4', '5' ],
+	[ '1', '2', '3', '4', '5', '6' ]
+];
+
+function genCode(arr) {
 	console.log('genCode check', wins);
 	const result = [];
 	const c = wins < 60 ? (Math.floor(wins / 10)) : 6;
 	let i = 0;
-	const a = arr[c];
+	const a = arr[c].length;
 	while (i < 4) {
-		result.push(String(_.random(1, 4, false)));
+		result.push(String(_.random(1, a, false)));
 		i++;
 	}
 	return result;
@@ -24,6 +28,7 @@ function checkCode(userinput, code) {
 	const c = [ ...code ];
 	const ui = Object.values(userinput);
 	if (c.join('') === ui.join('')) {
+		wins += 1;
 		return 'HURRAY';
 	}
 	// Bull

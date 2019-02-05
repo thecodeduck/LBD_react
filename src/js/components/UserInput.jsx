@@ -16,10 +16,7 @@ class UserInput extends React.Component {
 	}
 
 	onInput1Change(newValue) {
-		// newValue = this.isValidNumber(newValue) ? String(newValue) : '';
-		console.log( typeof newValue);
-
-		newValue = Number.isInteger(newValue) ? String(newValue) : '';
+		newValue = this.isValidNumber(newValue) ? String(newValue) : '';
 		const oldUserInputValue = this.props.value;
 		const newUserInputValue = {
 			input1: newValue,
@@ -64,16 +61,14 @@ class UserInput extends React.Component {
 		this.props.onChange(newUserInputValue, oldUserInputValue);
 	}
 
-	isValidNumberOLD(n) {
+	isValidNumber(n) {
 		const wins = this.props.wins;
-		console.log(wins);
-		const check = wins < 60 ? (Math.floor(wins / 10)) : 6;
-		console.log(check);
-		return setList[check].has(n);
+		const current = wins < 60 ? (Math.floor(wins / 10)) : 6;
+		return n < setList[current].length + 1; // 10 points to type coercion
 	}
 
-	isValidNumber(n) {
-		return Number.isInteger(n);
+	isValidNumberTEMP(n) {
+		return n;
 	}
 
 	render() {

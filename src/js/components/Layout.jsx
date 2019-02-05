@@ -33,8 +33,8 @@ export default class Layout extends React.Component {
 		current.push(Object.values(this.state.userinput));
 		current.push(' ');
 		current.push(checkCode(this.state.userinput, this.state.code));
-		if (checkCode(this.state.userinput, this.state.code) === 'HURRAY') {
-			this.setState({ code: genCode(setList[1]), wins: this.state.wins + 1 });
+		if (current[2] === 'HURRAY') {
+			this.setState({ code: genCode(setList), wins: this.state.wins + 1 });
 		}
 		result.push(current);
 		this.setState({ userinput: {}, history: result });
@@ -56,16 +56,8 @@ export default class Layout extends React.Component {
 					<h2> Wins: {this.state.wins} </h2>
 				{this.state.history.map(this.renderHistory)}
 				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} />
-				<Button label="Check me!" onClick={this.onCheckClick} />
+					<Button label="Check me!" onClick={this.onCheckClick} />
 			</div>
 		);
 	}
 }
-
-Layout.propTypes = {
-	win: PropTypes.number,
-};
-
-Layout.defaultProps = {
-	win: 0,
-};
