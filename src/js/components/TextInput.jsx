@@ -22,9 +22,11 @@ class ControlledTextInput extends React.Component {
 			name,
 			label,
 			placeholder,
+			size,
 			disabled,
 			value,
 			autoFocus,
+			inputRef,
 		} = this.props;
 
 		const inputView = (
@@ -32,10 +34,12 @@ class ControlledTextInput extends React.Component {
 				name={name}
 				type="text"
 				placeholder={placeholder}
+				size={size}
 				disabled={disabled}
 				value={value}
 				id={this.state.htmlID}
 				autoFocus={autoFocus}
+				ref={inputRef}
 				onChange={this.onChangeWrapper}
 				/>
 		);
@@ -56,9 +60,11 @@ ControlledTextInput.propTypes = {
 	name: PropTypes.string,
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
+	size: PropTypes.string,
 	disabled: PropTypes.bool,
 	value: PropTypes.string,
 	autoFocus: PropTypes.bool,
+	inputRef: PropTypes.Object,
 	onChange: PropTypes.func,
 };
 

@@ -39,13 +39,13 @@ export default class Layout extends React.Component {
 		}
 		result.push(current);
 		this.setState({ userinput: {}, history: result });
-		this.textInput.focus();
+		this.textInput.current.focus();
 	}
 
 	renderHistory(arr, i) {
 		return (
 			<React.Fragment>
-				<p>Guess {i + 1} : <b>{arr}</b> </p>
+				<p>guess {i + 1} : <b>{arr}</b> </p>
 			</React.Fragment>
 		);
 	}
@@ -53,12 +53,12 @@ export default class Layout extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2> Your number choices are: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </h2>
+				<h2> WINS: {this.state.wins} </h2>
+				<p> guess from numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
 					<h2> {this.state.code} </h2>
-					<h2> Wins: {this.state.wins} </h2>
 				{this.state.history.map(this.renderHistory)}
-				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} ref={this.textInputTop} />
-					<Button label="Check me!" onClick={this.onCheckClick} />
+				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
+					<Button label="CHECK" onClick={this.onCheckClick} />
 			</div>
 		);
 	}

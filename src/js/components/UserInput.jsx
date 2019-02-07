@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 
 import { Controlled } from './TextInput';
 import { setList } from './logic';
+import Button from './Button';
+
 
 class UserInput extends React.Component {
 	constructor(props) {
 		super(props);
-		this.textInput = React.createRef();
 		this.onInput1Change = this.onInput1Change.bind(this);
 		this.onInput2Change = this.onInput2Change.bind(this);
 		this.onInput3Change = this.onInput3Change.bind(this);
 		this.onInput4Change = this.onInput4Change.bind(this);
 		this.isValidNumber = this.isValidNumber.bind(this);
+		this.focusTextInput = this.focusTextInput.bind(this);
 	}
 
 	onInput1Change(newValue) {
@@ -62,7 +64,7 @@ class UserInput extends React.Component {
 	}
 
 	focusTextInput() {
-		this.textInput.current.focus();
+		this.textInput.current.handleFocus();
 	}
 
 	isValidNumber(n) {
@@ -76,10 +78,10 @@ class UserInput extends React.Component {
 
 		return (
 			<div>
-				<Controlled value={value.input1} onChange={this.onInput1Change} autoFocus ref={this.textInput} />
-				<Controlled value={value.input2} onChange={this.onInput2Change} />
-				<Controlled value={value.input3} onChange={this.onInput3Change} />
-				<Controlled value={value.input4} onChange={this.onInput4Change} />
+				<Controlled value={value.input1} size="1" onChange={this.onInput1Change} autoFocus inputRef={this.props.inputRef} />
+				<Controlled value={value.input2} size="1" onChange={this.onInput2Change} />
+				<Controlled value={value.input3} size="1" onChange={this.onInput3Change} />
+				<Controlled value={value.input4} size="1" onChange={this.onInput4Change} />
 			</div>
 		);
 	}
@@ -92,6 +94,7 @@ UserInput.propTypes = {
 		input3: PropTypes.string,
 		input4: PropTypes.string,
 	}),
+	inputRef: PropTypes.Object,
 	onChange: PropTypes.func,
 	wins: PropTypes.number,
 };
