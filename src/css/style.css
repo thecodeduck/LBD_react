@@ -5,9 +5,8 @@ body {
 
 .card {
 	background-color: white;
-	height: 90vh;
-	min-width: 400px;
-	max-width: 600px;
+	min-height: 90vh;
+	width: 400px;
 	border-radius: 2px;
 	margin: 20px auto;
 	padding: 20px;
@@ -45,14 +44,22 @@ input:focus {
 }
 
 button {
+	color: #3a4449;
 	font-weight: 700;
 	padding-top: .4rem;
 	width: 290px;
 	margin: 10px auto;
-	background-color: #FF9A0B;
-	border: 2px solid #FF9A0B;
+	border: 2px solid #3a4449;
+	opacity: 1;
 	border-radius: 2px;
 	outline: none;
+	transition: .08s;
+}
+
+button:focus {
+	color: white;
+	background-color: #FF9A0B;
+	border-color: #FF9A0B;
 }
 
 button:disabled {
@@ -60,4 +67,5 @@ button:disabled {
 	background-color: white;
 	border: 2px solid #818F95;
 	opacity: 0.6;
+	transition: 0s !important;
 }

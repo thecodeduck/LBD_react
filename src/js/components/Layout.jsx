@@ -31,7 +31,7 @@ export default class Layout extends React.Component {
 		this.setState({ userinput: newUserInput });
 		if (_.every(test, (n) => typeof n === 'string' && n !== '')) {
 			this.setState({ submitNotValid: false });
-		}
+		} else { this.setState({ submitNotValid: true }); }
 		console.log('onChange newUserInput', newUserInput);
 	}
 
