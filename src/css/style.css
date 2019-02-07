@@ -1,0 +1,30 @@
+body {
+	padding: 10px;
+}
+
+input {
+	display: inline-block;
+	box-sizing: border-box;
+	font-size: 46px;
+	padding-left: 20px;
+	border: none;
+	border-bottom: 4px solid black;
+	margin-right: 10px;
+	outline: none;
+
+}
+
+input:not(:last-child):after {
+	margin-right: 0px;
+}
+
+input:focus {
+	border-bottom: 4px solid orangered;
+	color: transparent;
+  text-shadow: 0 0 0 #2196f3;
+}
+
+button {
+	width: 100%;
+	margin: 10px 0;
+}
