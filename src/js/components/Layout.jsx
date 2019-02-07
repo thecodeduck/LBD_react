@@ -36,15 +36,14 @@ export default class Layout extends React.Component {
 	}
 
 	onCheckClick() {
-		const result = this.state.history.slice();
-		let current = [];
-		current.push(Object.values(this.state.userinput));
-		current.push(' ');
-		current.push(checkCode(this.state.userinput, this.state.code));
+		let result = this.state.history.slice();
+		const current = [];
+		current.push.apply(current, [ Object.values(this.state.userinput), ' ', checkCode(this.state.userinput, this.state.code) ]);
+		result.push(current);
 		if (current[2] === 'HURRAY') {
 			this.setState({ code: genCode(setList), wins: this.state.wins + 1 });
+			result = [];
 		}
-		result.push(current);
 		this.setState({ userinput: {}, history: result, submitNotValid: true });
 		this.textInput.current.focus();
 	}
@@ -60,8 +59,8 @@ export default class Layout extends React.Component {
 	render() {
 		return (
 			<div className="card">
-				<h2> WINS: {this.state.wins} </h2>
-				<p> The 4-digit code <br/> contains numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
+				<h2 className="wins"> WINS: {this.state.wins} </h2>
+				<p> The 4-digit code <br /> contains numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
 					<div className="about">
 						<p>	■ Right Number & Right Placement </p>
 						<p>	□ Right Number & Wrong Placement </p>
