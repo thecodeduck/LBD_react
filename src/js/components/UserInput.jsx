@@ -77,11 +77,11 @@ class UserInput extends React.Component {
 		const value = this.props.value;
 
 		return (
-			<div>
-				<Controlled value={value.input1} size="1" onChange={this.onInput1Change} autoFocus inputRef={this.props.inputRef} />
-				<Controlled value={value.input2} size="1" onChange={this.onInput2Change} />
-				<Controlled value={value.input3} size="1" onChange={this.onInput3Change} />
-				<Controlled value={value.input4} size="1" onChange={this.onInput4Change} />
+			<div className="userinput">
+				<Controlled value={value.input1} size="1" onChange={this.onInput1Change} inputRef={this.props.inputRef} autoFocus required />
+				<Controlled value={value.input2} size="1" onChange={this.onInput2Change} required />
+				<Controlled value={value.input3} size="1" onChange={this.onInput3Change} required />
+				<Controlled value={value.input4} size="1" onChange={this.onInput4Change} required />
 			</div>
 		);
 	}

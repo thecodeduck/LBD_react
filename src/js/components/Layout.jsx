@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+
 
 import Button from './Button';
 import { setList, genCode, checkCode } from './logic';
@@ -17,6 +19,7 @@ export default class Layout extends React.Component {
 			history: [],
 			wins: 0,
 			code: genCode(setList),
+			submitNotValid: true,
 		};
 		this.textInput = React.createRef();
 		this.onCheckClick = this.onCheckClick.bind(this);
@@ -24,7 +27,11 @@ export default class Layout extends React.Component {
 	}
 
 	onUserInputChange(newUserInput) {
+		const test = _.values(newUserInput);
 		this.setState({ userinput: newUserInput });
+		if (_.every(test, (n) => typeof n === 'string' && n !== '')) {
+			this.setState({ submitNotValid: false });
+		}
 		console.log('onChange newUserInput', newUserInput);
 	}
 
@@ -38,7 +45,7 @@ export default class Layout extends React.Component {
 			this.setState({ code: genCode(setList), wins: this.state.wins + 1 });
 		}
 		result.push(current);
-		this.setState({ userinput: {}, history: result });
+		this.setState({ userinput: {}, history: result, submitNotValid: true });
 		this.textInput.current.focus();
 	}
 
@@ -52,13 +59,15 @@ export default class Layout extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="card">
 				<h2> WINS: {this.state.wins} </h2>
 				<p> guess from numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
 					<h2> {this.state.code} </h2>
 				{this.state.history.map(this.renderHistory)}
-				<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
-					<Button label="CHECK" onClick={this.onCheckClick} />
+				<form className="userinputForm">
+					<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
+					<Button label="CHECK" onClick={this.onCheckClick} disabled={this.state.submitNotValid} />
+				</form>
 			</div>
 		);
 	}

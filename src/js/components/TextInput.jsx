@@ -23,7 +23,7 @@ class ControlledTextInput extends React.Component {
 			label,
 			placeholder,
 			size,
-			disabled,
+			required,
 			value,
 			autoFocus,
 			inputRef,
@@ -35,10 +35,11 @@ class ControlledTextInput extends React.Component {
 				type="text"
 				placeholder={placeholder}
 				size={size}
-				disabled={disabled}
+				required={required}
 				value={value}
 				id={this.state.htmlID}
 				autoFocus={autoFocus}
+				autoComplete="off"
 				ref={inputRef}
 				onChange={this.onChangeWrapper}
 				/>
@@ -61,7 +62,7 @@ ControlledTextInput.propTypes = {
 	label: PropTypes.string,
 	placeholder: PropTypes.string,
 	size: PropTypes.string,
-	disabled: PropTypes.bool,
+	required: PropTypes.bool,
 	value: PropTypes.string,
 	autoFocus: PropTypes.bool,
 	inputRef: PropTypes.Object,

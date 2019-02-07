@@ -13,14 +13,15 @@ class Button extends React.Component {
 			label,
 			type,
 			name,
+			disabled,
 			onClick,
 		} = props;
 
 		const clickWrapper = (evt) => onClick(name);
 
 		return (
-			<button type={type} onClick={clickWrapper} name={name}>
-				<p>{ label }</p>
+			<button type={type} onClick={clickWrapper} name={name} disabled={disabled}>
+				{ label }
 			</button>
 		);
 	}
@@ -30,6 +31,7 @@ Button.propTypes = {
 	label: PropTypes.string,
 	name: PropTypes.string,
 	type: PropTypes.string,
+	disabled: PropTypes.bool,
 	onClick: PropTypes.func,
 };
 
