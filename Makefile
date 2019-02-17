@@ -1,19 +1,35 @@
+
+NPM = pnpm
+
 default: help
 
 ##	make help - display the help
-##
+##	@ - supresses command output
 help:
 	@grep "^##.*" ./Makefile
 
 ##	setup - install packages
 ##
 setup:
-	pnpm install
+	$(NPM) install
 
 ## run - attempt run webpack-dev-server
 ##
 run:
-	npm run dev
+	$(NPM) run dev
+
+
+build-js:
+	$(NPM) run build
+
+build-favicon:
+	cp ./src/favicon.ico ./dist
+
+build-index:
+	cp ./src/index.html ./dist
+
+build: build-js build-favicon build-index
+
 
 ##	tests - run all tests
 ##	test NAME=name - run single test, searches thru 'describe' suite

@@ -3,6 +3,12 @@ body {
 	background-color: #3a4449;
 }
 
+footer {
+	color: rgba(255, 255, 255, 0.6);
+	font-weight: 600;
+	padding: 1rem;
+}
+
 .card {
 	box-sizing:border-box;
 	background-color: white;
@@ -23,6 +29,12 @@ body {
 	margin: auto;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 input {
 	display: inline-block;
 	box-sizing: border-box;
@@ -33,7 +45,7 @@ input {
 	border-bottom: 6px solid #526067;
 	margin-right: 10px;
 	outline: none;
-
+	width: 46px;
 }
 
 input:last-child {
@@ -60,7 +72,7 @@ button {
 	transition: .08s;
 }
 
-button:focus, button:active {
+button:hover, button:focus, button:active {
 	color: white;
 	background-color: #FF9A0B;
 	border-color: #FF9A0B;
@@ -73,6 +85,15 @@ button:disabled {
 	opacity: 0.6;
 	transition: 0s !important;
 }
+
+a {
+	color: #2196f3;
+}
+a:hover, a:focus, a:active {
+	color: #69bcfe;
+	text-decoration: none;
+}
+
 .about {
 	border-top: 1px solid #87c6f7;
 	border-bottom: 1px solid #87c6f7;

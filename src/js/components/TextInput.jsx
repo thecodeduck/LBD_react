@@ -32,7 +32,7 @@ class ControlledTextInput extends React.Component {
 		const inputView = (
 			<input
 				name={name}
-				type="text"
+				type="number"
 				placeholder={placeholder}
 				size={size}
 				required={required}

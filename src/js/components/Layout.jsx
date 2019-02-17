@@ -58,21 +58,25 @@ export default class Layout extends React.Component {
 
 	render() {
 		return (
-			<div className="card">
-				<h2 className="wins"> WINS: {this.state.wins} </h2>
-				<p> The 4-digit code <br /> contains numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
-					<div className="about">
-						<p>	■ Right Number & Right Placement </p>
-						<p>	□ Right Number & Wrong Placement </p>
-					</div>
-				<section className="history">
-					{this.state.history.map(this.renderHistory)}
-				</section>
-				<form className="userinputForm">
-					<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
-					<Button label="CHECK" onClick={this.onCheckClick} disabled={this.state.submitNotValid} />
-				</form>
-			</div>
+			<React.Fragment>
+				<div className="card">
+					<h2 className="wins"> WINS: {this.state.wins} </h2>
+					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
+						<div className="about">
+							<p>	■ Right Number & Right Placement </p>
+							<p>	□ Right Number & Wrong Placement </p>
+						</div>
+					<section className="history">
+						{this.state.history.map(this.renderHistory)}
+					</section>
+					<form className="userinputForm">
+						<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
+						<Button label="CHECK" onClick={this.onCheckClick} disabled={this.state.submitNotValid} />
+					</form>
+				</div>
+				<footer className="header"><a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)">Mastermind</a> by <a href="https://twitter.com/thecodeduck">@thecodeduck</a></footer>
+
+			</React.Fragment>
 		);
 	}
 }
