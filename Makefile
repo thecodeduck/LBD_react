@@ -1,10 +1,12 @@
 
 NPM = pnpm
+BUILD_DIR = ./docs
 
 default: help
 
 ##	make help - display the help
-##	@ - supresses command output
+##
+# @ - supresses command output
 help:
 	@grep "^##.*" ./Makefile
 
@@ -20,13 +22,13 @@ run:
 
 
 build-js:
-	$(NPM) run build
+	BUILD_DIR=$(BUILD_DIR) $(NPM) run build
 
 build-favicon:
-	cp ./src/favicon.ico ./dist
+	cp ./src/favicon.ico $(BUILD_DIR)
 
 build-index:
-	cp ./src/index.html ./dist
+	cp ./src/index.html $(BUILD_DIR)
 
 build: build-js build-favicon build-index
 

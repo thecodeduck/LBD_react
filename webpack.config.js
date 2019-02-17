@@ -2,6 +2,10 @@ var debug = process.env.NODE_ENV !== 'production';
 var webpack = require('webpack');
 var path = require('path');
 
+const BUILD_DIR = path.resolve(
+	process.env.BUILD_DIR || './dist'
+);
+
 module.exports = {
 	context: path.join(__dirname, 'src'),
 	devtool: debug ? 'inline-sourcemap' : false,
@@ -25,7 +29,7 @@ module.exports = {
 		],
 	},
 	output: {
-		path: `${__dirname}/dist/`,
+		path: BUILD_DIR,
 		filename: 'client.min.js',
 	},
 	resolve: {
