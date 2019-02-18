@@ -33,6 +33,7 @@ class ControlledTextInput extends React.Component {
 			<input
 				name={name}
 				type="number"
+				pattern="[0-9]*"
 				placeholder={placeholder}
 				size={size}
 				required={required}
