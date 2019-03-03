@@ -62,10 +62,10 @@ export default class Layout extends React.Component {
 				<div className="card">
 					<h2 className="wins"> WINS: {this.state.wins} </h2>
 					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
-						<div className="about">
-							<p>	■ Right Number & Right Placement </p>
-							<p>	□ Right Number & Wrong Placement </p>
-						</div>
+					<div className="about">
+						<p>	■ Right Number & Right Placement </p>
+						<p>	□ Right Number & Wrong Placement </p>
+					</div>
 					<section className="history">
 						{this.state.history.map(this.renderHistory)}
 					</section>
