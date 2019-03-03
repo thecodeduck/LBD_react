@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
+import { connect } from 'react-redux';
 
 import Button from './Button';
 import { setList, genCode, checkCode } from './logic';
-
+import { updateUser } from '../actions/userAction';
 
 // const UserInput = require('./UserInput').default;
 import UserInput from './UserInput';
 // import Controlled from './Textinput.jsx';
 
-export default class Layout extends React.Component {
+class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -24,6 +25,12 @@ export default class Layout extends React.Component {
 		this.textInput = React.createRef();
 		this.onCheckClick = this.onCheckClick.bind(this);
 		this.onUserInputChange = this.onUserInputChange.bind(this);
+		this.onUpdateUser = this.onUpdateUser.bind(this);
+	}
+
+	onUpdateUser(evt) {
+		//eslint-disable-next-line
+		this.props.onUpdateUser(evt.target.value);
 	}
 
 	onUserInputChange(newUserInput) {
@@ -59,6 +66,8 @@ export default class Layout extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
+				<input className="custom" onChange={this.onUpdateUser} />
+				<h1>{this.props.user}</h1>
 				<div className="card">
 					<h2 className="wins"> WINS: {this.state.wins} </h2>
 					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
@@ -80,3 +89,14 @@ export default class Layout extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	products: state.products,
+	user: state.user,
+});
+
+const mapActionsToProps = {
+	onUpdateUser: updateUser,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(App);

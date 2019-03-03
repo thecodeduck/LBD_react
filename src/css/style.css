@@ -64,6 +64,10 @@ input {
 	text-align: center;
 }
 
+.custom {
+	width: auto;
+}
+
 input:last-child {
 	margin-right: 0px;
 }
