@@ -3,65 +3,57 @@ import PropTypes from 'prop-types';
 
 import { Controlled } from './TextInput';
 import { setList } from './logic';
-import Button from './Button';
+// import Button from './Button';
 
 
 class UserInput extends React.Component {
 	constructor(props) {
 		super(props);
-		this.onInput1Change = this.onInput1Change.bind(this);
-		this.onInput2Change = this.onInput2Change.bind(this);
-		this.onInput3Change = this.onInput3Change.bind(this);
-		this.onInput4Change = this.onInput4Change.bind(this);
+		this.onInputChange = this.onInputChange.bind(this);
 		this.isValidNumber = this.isValidNumber.bind(this);
 		this.focusTextInput = this.focusTextInput.bind(this);
 	}
 
-	onInput1Change(newValue) {
-		newValue = this.isValidNumber(newValue) ? String(newValue) : '';
+	onInputChange(nValue, value, name) {
+		let newValue = nValue;
+		if (!this.isValidNumber(newValue)) {
+			console.log(`${newValue} IS NOT A NUMBER IN THE CODE GENERATOR`);
+			newValue = undefined;
+		} else {
+			newValue = String(newValue);
+		}
+		// newValue = this.isValidNumber(newValue) ? String(newValue) : undefined;
 		const oldUserInputValue = this.props.value;
-		const newUserInputValue = {
-			input1: newValue,
-			input2: oldUserInputValue.input2,
-			input3: oldUserInputValue.input3,
-			input4: oldUserInputValue.input4,
-		};
+		let newUserInputValue;
+		switch (name) {
+			case 'i1':
+				newUserInputValue = { ...oldUserInputValue, input1: newValue };
+				break;
+			case 'i2':
+				newUserInputValue = { ...oldUserInputValue, input2: newValue };
+				break;
+			case 'i3':
+				newUserInputValue = { ...oldUserInputValue, input3: newValue };
+				break;
+			case 'i4':
+				newUserInputValue = { ...oldUserInputValue, input4: newValue };
+				break;
+			default: console.log('ERROR');
+		}
 		this.props.onChange(newUserInputValue, oldUserInputValue);
 	}
 
-	onInput2Change(newValue) {
-		newValue = this.isValidNumber(newValue) ? String(newValue) : '';
-		const oldUserInputValue = this.props.value;
-		const newUserInputValue = {
-			input1: oldUserInputValue.input1,
-			input2: newValue,
-			input3: oldUserInputValue.input3,
-			input4: oldUserInputValue.input4,
-		};
-		this.props.onChange(newUserInputValue, oldUserInputValue);
-	}
-	onInput3Change(newValue) {
-		newValue = this.isValidNumber(newValue) ? String(newValue) : '';
-		const oldUserInputValue = this.props.value;
-		const newUserInputValue = {
-			input1: oldUserInputValue.input1,
-			input2: oldUserInputValue.input2,
-			input3: newValue,
-			input4: oldUserInputValue.input4,
-		};
-		this.props.onChange(newUserInputValue, oldUserInputValue);
-	}
-	onInput4Change(newValue) {
-		newValue = this.isValidNumber(newValue) ? String(newValue) : '';
-		const oldUserInputValue = this.props.value;
-		const newUserInputValue = {
-			input1: oldUserInputValue.input1,
-			input2: oldUserInputValue.input2,
-			input3: oldUserInputValue.input3,
-			input4: newValue,
-		};
-		this.props.onChange(newUserInputValue, oldUserInputValue);
-	}
+	// onInput4Change(newValue) {
+	// 	newValue = this.isValidNumber(newValue) ? String(newValue) : '';
+	// 	const oldUserInputValue = this.props.value;
+	// 	const newUserInputValue = {
+	// 		input1: oldUserInputValue.input1,
+	// 		input2: oldUserInputValue.input2,
+	// 		input3: oldUserInputValue.input3,
+	// 		input4: newValue,
+	// 	};
+	// 	this.props.onChange(newUserInputValue, oldUserInputValue);
+	// }
 
 	focusTextInput() {
 		this.textInput.current.handleFocus();
@@ -78,10 +70,10 @@ class UserInput extends React.Component {
 
 		return (
 			<div className="userinput">
-				<Controlled value={value.input1} size="1" onChange={this.onInput1Change} inputRef={this.props.inputRef} autoFocus required />
-				<Controlled value={value.input2} size="1" onChange={this.onInput2Change} required />
-				<Controlled value={value.input3} size="1" onChange={this.onInput3Change} required />
-				<Controlled value={value.input4} size="1" onChange={this.onInput4Change} required />
+				<Controlled value={value.input1} name="i1" size="1" onChange={this.onInputChange} inputRef={this.props.inputRef} autoFocus required />
+				<Controlled value={value.input2} name="i2" size="1" onChange={this.onInputChange} required />
+				<Controlled value={value.input3} name="i3" size="1" onChange={this.onInputChange} required />
+				<Controlled value={value.input4} name="i4" size="1" onChange={this.onInputChange} required />
 			</div>
 		);
 	}

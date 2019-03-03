@@ -13,8 +13,8 @@ class ControlledTextInput extends React.Component {
 	}
 
 	onChangeWrapper(event) {
-		const { onChange, value } = this.props;
-		onChange(event.target.value, value);
+		const { onChange, value, name } = this.props;
+		onChange(event.target.value, value, name);
 	}
 
 	render() {
@@ -106,9 +106,6 @@ class UncontrolledTextInput extends React.Component {
 }
 
 UncontrolledTextInput.propTypes = {
-	label: PropTypes.string,
-	placeholder: PropTypes.string,
-	disabled: PropTypes.bool,
 	value: PropTypes.string,
 	onChange: PropTypes.func,
 };
