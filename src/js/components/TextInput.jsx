@@ -27,6 +27,8 @@ class ControlledTextInput extends React.Component {
 			value,
 			autoFocus,
 			inputRef,
+			min,
+			max,
 		} = this.props;
 
 		const inputView = (
@@ -42,6 +44,8 @@ class ControlledTextInput extends React.Component {
 				autoFocus={autoFocus}
 				autoComplete="off"
 				ref={inputRef}
+				min={min}
+				max={max}
 				onChange={this.onChangeWrapper}
 				/>
 		);
@@ -67,6 +71,8 @@ ControlledTextInput.propTypes = {
 	value: PropTypes.string,
 	autoFocus: PropTypes.bool,
 	inputRef: PropTypes.Object,
+	min: PropTypes.string,
+	max: PropTypes.string,
 	onChange: PropTypes.func,
 };
 

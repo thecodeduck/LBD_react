@@ -9,7 +9,7 @@ import { setList, genCode, checkCode } from './logic';
 import { updateWins, resetWins } from '../actions/gameAction';
 
 // const UserInput = require('./UserInput').default;
-import UserInput from './UserInput';
+import { Controlled } from './TextInput';
 // import Controlled from './Textinput.jsx';
 
 class App extends React.Component {
@@ -18,7 +18,6 @@ class App extends React.Component {
 		this.state = {
 			userinput: {},
 			history: [],
-			wins: 0,
 			code: genCode(setList),
 			submitNotValid: true,
 		};
@@ -26,12 +25,13 @@ class App extends React.Component {
 		this.onCheckClick = this.onCheckClick.bind(this);
 		this.onUserInputChange = this.onUserInputChange.bind(this);
 		this.onUpdateWins = this.onUpdateWins.bind(this);
+		this.onResetWins = this.onResetWins.bind(this);
 	}
 
 	onUserInputChange(newUserInput) {
 		const test = _.values(newUserInput);
 		this.setState({ userinput: newUserInput });
-		if (_.every(test, (n) => typeof n === 'string' && n !== '')) {
+		if (newUserInput.length === 4 && _.every(test, (n) => typeof n === 'string' && n !== '')) {
 			this.setState({ submitNotValid: false });
 		} else { this.setState({ submitNotValid: true }); }
 		console.log('onChange newUserInput', newUserInput);
@@ -63,15 +63,20 @@ class App extends React.Component {
 		//eslint-disable-next-line
 		this.props.onUpdateWins(evt);
 	}
+	onResetWins(evt) {
+		//eslint-disable-next-line
+		this.props.onResetWins(evt);
+	}
 
 	render() {
 		return (
 			<React.Fragment>
 				<button className="custom" onClick={this.onUpdateWins}>TEST</button>
+				<button className="custom" onClick={this.onResetWins}>RESET</button>
 				<h1>{this.props.wins}</h1>
 				<div className="card">
-					<h2 className="wins"> WINS: {this.state.wins} </h2>
-					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
+					<h2 className="wins"> WINS: {this.props.wins} </h2>
+					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.props.wins < 60 ? (Math.floor(this.props.wins / 10)) : 6]} </p>
 					<div className="about">
 						<p>	■ Right Number & Right Placement </p>
 						<p>	□ Right Number & Wrong Placement </p>
@@ -80,7 +85,7 @@ class App extends React.Component {
 						{this.state.history.map(this.renderHistory)}
 					</section>
 					<form className="userinputForm">
-						<UserInput value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
+						<Controlled className="custom" value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
 						<Button label="CHECK" onClick={this.onCheckClick} disabled={this.state.submitNotValid} />
 					</form>
 				</div>
@@ -97,6 +102,7 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = {
 	onUpdateWins: updateWins,
+	onResetWins: resetWins,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(App);

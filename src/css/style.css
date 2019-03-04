@@ -58,9 +58,9 @@ input {
 	border: none;
 	border-radius: 0px;
 	border-bottom: 6px solid #526067;
-	margin-right: 10px;
+	margin: auto;
 	outline: none;
-	width: 3rem;
+	width: 100%;
 	text-align: center;
 }
 
