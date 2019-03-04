@@ -7,21 +7,21 @@ import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
 import App from './components/App';
-import productsReducer from './reducers/productsReducer';
+import gameReducer from './reducers/gameReducer';
 import userReducer from './reducers/userReducer';
 
 import '../css/style.css';
 
 const allReducers = combineReducers({
-	products: productsReducer,
+	wins: gameReducer,
 	user: userReducer,
 });
 
 const store = createStore(
 	allReducers,
 	{
-		products: [ { name: 'iPhone' } ],
-		user: 'Megan',
+		userInput: [],
+		gameCode: NaN,
 	},
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

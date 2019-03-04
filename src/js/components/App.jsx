@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import Button from './Button';
 import { setList, genCode, checkCode } from './logic';
-import { updateUser } from '../actions/userAction';
+import { updateWins, resetWins } from '../actions/gameAction';
 
 // const UserInput = require('./UserInput').default;
 import UserInput from './UserInput';
@@ -25,12 +25,7 @@ class App extends React.Component {
 		this.textInput = React.createRef();
 		this.onCheckClick = this.onCheckClick.bind(this);
 		this.onUserInputChange = this.onUserInputChange.bind(this);
-		this.onUpdateUser = this.onUpdateUser.bind(this);
-	}
-
-	onUpdateUser(evt) {
-		//eslint-disable-next-line
-		this.props.onUpdateUser(evt.target.value);
+		this.onUpdateWins = this.onUpdateWins.bind(this);
 	}
 
 	onUserInputChange(newUserInput) {
@@ -63,11 +58,17 @@ class App extends React.Component {
 		);
 	}
 
+
+	onUpdateWins(evt) {
+		//eslint-disable-next-line
+		this.props.onUpdateWins(evt);
+	}
+
 	render() {
 		return (
 			<React.Fragment>
-				<input className="custom" onChange={this.onUpdateUser} />
-				<h1>{this.props.user}</h1>
+				<button className="custom" onClick={this.onUpdateWins}>TEST</button>
+				<h1>{this.props.wins}</h1>
 				<div className="card">
 					<h2 className="wins"> WINS: {this.state.wins} </h2>
 					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.state.wins < 60 ? (Math.floor(this.state.wins / 10)) : 6]} </p>
@@ -91,12 +92,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	products: state.products,
-	user: state.user,
+	wins: state.wins,
 });
 
 const mapActionsToProps = {
-	onUpdateUser: updateUser,
+	onUpdateWins: updateWins,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(App);

@@ -26,16 +26,16 @@ class UserInput extends React.Component {
 		const oldUserInputValue = this.props.value;
 		let newUserInputValue;
 		switch (name) {
-			case 'i1':
+			case 'input1':
 				newUserInputValue = { ...oldUserInputValue, input1: newValue };
 				break;
-			case 'i2':
+			case 'input2':
 				newUserInputValue = { ...oldUserInputValue, input2: newValue };
 				break;
-			case 'i3':
+			case 'input3':
 				newUserInputValue = { ...oldUserInputValue, input3: newValue };
 				break;
-			case 'i4':
+			case 'input4':
 				newUserInputValue = { ...oldUserInputValue, input4: newValue };
 				break;
 			default: console.log('ERROR');
@@ -70,10 +70,10 @@ class UserInput extends React.Component {
 
 		return (
 			<div className="userinput">
-				<Controlled value={value.input1} name="i1" size="1" onChange={this.onInputChange} inputRef={this.props.inputRef} autoFocus required />
-				<Controlled value={value.input2} name="i2" size="1" onChange={this.onInputChange} required />
-				<Controlled value={value.input3} name="i3" size="1" onChange={this.onInputChange} required />
-				<Controlled value={value.input4} name="i4" size="1" onChange={this.onInputChange} required />
+				<Controlled value={value.input1} name="input1" size="1" onChange={this.onInputChange} inputRef={this.props.inputRef} autoFocus required />
+				<Controlled value={value.input2} name="input2" size="1" onChange={this.onInputChange} required />
+				<Controlled value={value.input3} name="input3" size="1" onChange={this.onInputChange} required />
+				<Controlled value={value.input4} name="input4" size="1" onChange={this.onInputChange} required />
 			</div>
 		);
 	}
