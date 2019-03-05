@@ -4,13 +4,15 @@ import reduceReducers from 'reduce-reducers';
 import isValidGamestate from '../models/isValidGamestate';
 import codeGen from '../models/codeGen';
 import { UPDATE_WINS, RESET_WINS } from '../actions/gameAction';
+import { RESET_GAME, SUBMIT_GUESS } from '../actions/userAction';
+import { checkCode } from '../components/logic';
 
 function codeGenReducer(state, action) {
 	if (state.code) {
 		return state;
 	} else {
-		let code = codeGen(state.wins);
-		let newState = { ...state, code };
+		const code = codeGen(state.wins);
+		const newState = { ...state, code };
 		return newState;
 	}
 }
@@ -32,15 +34,41 @@ const initialState = {
 };
 
 function resetReducer(state, action) {
-	if (action.type !== RESET_WINS) {
+	if (action.type !== RESET_GAME) {
 		return state;
 	} else {
 		return initialState;
 	}
 }
 
+function submitGuessReducer(state, action) {
+	if (action.type !== SUBMIT_GUESS) {
+		return state;
+	} else {
+		const code = state.code;
+		const guess = action.payload.userInput;
+		const result = checkCode(guess, code);
+		if (result === 'HURRAY') {
+			const newState = {
+				...state,
+				wins: state.wins + 1,
+				code: null,
+				history: [],
+			};
+			return newState;
+		} else {
+			const newState = {
+				...state,
+				history: [ ...state.history, guess + ' ' + result ],
+			};
+			return newState;
+		}
+	}
+}
+
 export default reduceReducers(
 	resetReducer,
+	submitGuessReducer,
 	codeGenReducer,
 	debugReducer,
 	initialState
