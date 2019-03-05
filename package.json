@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --content-base src --inline --hot",
-    "build": "webpack --config=./webpack.config.js"
+    "build": "webpack --config=./webpack.config.js",
+		"tests": "mocha \"./src/**/*.mocha.tests.mjs\" --exit"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "mocha": "^6.0.2",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
     "style-loader": "^0.23.1",

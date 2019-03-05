@@ -16,7 +16,7 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userinput: {},
+			userinput: [],
 			history: [],
 			code: genCode(setList),
 			submitNotValid: true,
@@ -43,11 +43,11 @@ class App extends React.Component {
 		current.push.apply(current, [ Object.values(this.state.userinput), ' ', checkCode(this.state.userinput, this.state.code) ]);
 		result.push(current);
 		if (current[2] === 'HURRAY') {
-			this.setState({ code: genCode(setList), wins: this.state.wins + 1 });
+			this.setState({ code: genCode(setList) });
+			this.onUpdateWins();
 			result = [];
 		}
-		this.setState({ userinput: {}, history: result, submitNotValid: true });
-		this.textInput.current.focus();
+		this.setState({ userinput: [], history: result, submitNotValid: true });
 	}
 
 	renderHistory(arr, i) {
@@ -71,9 +71,9 @@ class App extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
+				<div>{this.props.code}</div>
 				<button className="custom" onClick={this.onUpdateWins}>TEST</button>
 				<button className="custom" onClick={this.onResetWins}>RESET</button>
-				<h1>{this.props.wins}</h1>
 				<div className="card">
 					<h2 className="wins"> WINS: {this.props.wins} </h2>
 					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.props.wins < 60 ? (Math.floor(this.props.wins / 10)) : 6]} </p>
@@ -85,11 +85,13 @@ class App extends React.Component {
 						{this.state.history.map(this.renderHistory)}
 					</section>
 					<form className="userinputForm">
-						<Controlled className="custom" value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
+						<Controlled className="custom" maxlength="4" placeholder="" value={this.state.userinput} onChange={this.onUserInputChange} wins={this.state.wins} inputRef={this.textInput} />
 						<Button label="CHECK" onClick={this.onCheckClick} disabled={this.state.submitNotValid} />
 					</form>
 				</div>
-				<footer className="header"><a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)">Mastermind</a> by <a href="https://twitter.com/thecodeduck">@thecodeduck</a></footer>
+				<footer className="header">
+					<a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)">Mastermind</a> by <a href="https://twitter.com/thecodeduck">@thecodeduck</a>
+				</footer>
 
 			</React.Fragment>
 		);
@@ -98,6 +100,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
 	wins: state.wins,
+	code: state.code,
 });
 
 const mapActionsToProps = {

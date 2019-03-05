@@ -26,16 +26,14 @@ class ControlledTextInput extends React.Component {
 			required,
 			value,
 			autoFocus,
-			inputRef,
-			min,
-			max,
+			maxlength,
 		} = this.props;
 
 		const inputView = (
 			<input
 				name={name}
-				type="number"
-				pattern="[0-9]*"
+				type="text"
+				pattern="\d*"
 				placeholder={placeholder}
 				size={size}
 				required={required}
@@ -43,9 +41,7 @@ class ControlledTextInput extends React.Component {
 				id={this.state.htmlID}
 				autoFocus={autoFocus}
 				autoComplete="off"
-				ref={inputRef}
-				min={min}
-				max={max}
+				maxLength={maxlength}
 				onChange={this.onChangeWrapper}
 				/>
 		);
@@ -70,9 +66,7 @@ ControlledTextInput.propTypes = {
 	required: PropTypes.bool,
 	value: PropTypes.string,
 	autoFocus: PropTypes.bool,
-	inputRef: PropTypes.Object,
-	min: PropTypes.string,
-	max: PropTypes.string,
+	maxlength: PropTypes.string,
 	onChange: PropTypes.func,
 };
 

@@ -10,7 +10,6 @@ const setList = [
 ];
 
 function genCode(arr) {
-	console.log('genCode check', wins);
 	const result = [];
 	const c = wins < 60 ? (Math.floor(wins / 10)) : 6;
 	let i = 0;
@@ -19,6 +18,7 @@ function genCode(arr) {
 		result.push(String(_.random(1, a, false)));
 		i++;
 	}
+	console.log('genCode check', wins, result);
 	return result;
 }
 
@@ -28,7 +28,6 @@ function checkCode(userinput, code) {
 	const c = [ ...code ];
 	const ui = Object.values(userinput);
 	if (c.join('') === ui.join('')) {
-		wins += 1;
 		return 'HURRAY';
 	}
 	// Bull
