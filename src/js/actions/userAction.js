@@ -1,10 +1,17 @@
-export const UPDATE_USER = 'users:updateUser';
+export const SUBMIT_GUESS = 'user:submitGuess';
+export const RESET_GAME = 'user:resetGame';
 
-export function updateUser(newUser) {
+export function submitGuess(newUserInput) {
 	return {
-		type: UPDATE_USER,
+		type: SUBMIT_GUESS,
 		payload: {
-			user: newUser,
+			userInput: newUserInput,
 		},
+	};
+}
+
+export function resetGame() {
+	return {
+		type: RESET_GAME,
 	};
 }

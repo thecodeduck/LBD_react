@@ -28,6 +28,7 @@ devDependencies:
   eslint-plugin-react: 6.10.3
   mocha: 6.0.2
   react-redux: 6.0.1
+  reduce-reducers: 0.4.3
   redux: 4.0.1
   style-loader: 0.23.1
   webpack: 3.10.0
@@ -7112,6 +7113,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-z5Fqsf1fHxbfsggi3W7H9zDCr94=
+  /reduce-reducers/0.4.3:
+    dev: true
+    resolution:
+      integrity: sha512-+CNMnI8QhgVMtAt54uQs3kUxC3Sybpa7Y63HR14uGLgI9/QR5ggHvpxwhGGe3wmx5V91YwqQIblN9k5lspAmGw==
   /redux/4.0.1:
     dependencies:
       loose-envify: 1.4.0
@@ -9063,6 +9068,7 @@ specifiers:
   react: ^16.7.0
   react-dom: ^16.7.0
   react-redux: ^6.0.1
+  reduce-reducers: ^0.4.3
   redux: ^4.0.1
   style-loader: ^0.23.1
   webpack: 3.10.0
