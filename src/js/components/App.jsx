@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 
 import Button from './Button';
-import { setList, checkCode } from './logic';
+import { setList } from './logic';
 import { submitGuess, resetGame } from '../actions/userAction';
 
 // const UserInput = require('./UserInput').default;
@@ -61,9 +61,6 @@ class App extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div>{this.props.code}</div>
-				<button className="custom" onClick={this.onUpdateWins}>TEST</button>
-				<button className="custom" onClick={this.onResetGame}>RESET</button>
 				<div className="card">
 					<h2 className="wins"> WINS: {this.props.wins} </h2>
 					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.props.wins < 30 ? (Math.floor(this.props.wins / 10)) : 3]} </p>

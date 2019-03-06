@@ -32,7 +32,7 @@ class ControlledTextInput extends React.Component {
 		const inputView = (
 			<input
 				name={name}
-				type="text"
+				type="tel"
 				pattern="\d*"
 				placeholder={placeholder}
 				size={size}
@@ -43,8 +43,8 @@ class ControlledTextInput extends React.Component {
 				autoComplete="off"
 				maxLength={maxlength}
 				onChange={this.onChangeWrapper}
-				onKeyPress={e => {
-					if (e.key === 'Enter') e.preventDefault();
+				onKeyPress={(evt) => {
+					if (evt.key === 'Enter') evt.preventDefault();
 				}}
 				/>
 		);
