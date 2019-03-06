@@ -43,6 +43,9 @@ class ControlledTextInput extends React.Component {
 				autoComplete="off"
 				maxLength={maxlength}
 				onChange={this.onChangeWrapper}
+				onKeyPress={e => {
+					if (e.key === 'Enter') e.preventDefault();
+				}}
 				/>
 		);
 		const labelView = label != null ? (

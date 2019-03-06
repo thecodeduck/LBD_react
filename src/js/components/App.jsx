@@ -5,8 +5,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 
 import Button from './Button';
-import { setList, genCode, checkCode } from './logic';
-import { updateWins, resetWins } from '../actions/gameAction';
+import { setList, checkCode } from './logic';
 import { submitGuess, resetGame } from '../actions/userAction';
 
 // const UserInput = require('./UserInput').default;
@@ -37,17 +36,8 @@ class App extends React.Component {
 	}
 
 	onCheckClick() {
-		// let result = this.state.history.slice();
-		// const current = [];
-		// current.push.apply(current, [ Object.values(this.state.userInput), ' ', checkCode(this.state.userInput, this.state.code) ]);
-		// result.push(current);
-		// if (current[2] === 'HURRAY') {
-		// 	this.setState({ code: genCode(setList) });
-		// 	this.onUpdateWins();
-		// 	result = [];
-		// }
 		this.setState({ userInput: [], submitNotValid: true });
-		console.log('OHAI', this.state.userInput);
+		console.log('Click Check', this.state.userInput);
 		this.props.submitGuess(this.state.userInput);
 	}
 
@@ -76,7 +66,7 @@ class App extends React.Component {
 				<button className="custom" onClick={this.onResetGame}>RESET</button>
 				<div className="card">
 					<h2 className="wins"> WINS: {this.props.wins} </h2>
-					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.props.wins < 60 ? (Math.floor(this.props.wins / 10)) : 6]} </p>
+					<p> Guess a 4-digit code <br /> containing the numbers: {setList[this.props.wins < 30 ? (Math.floor(this.props.wins / 10)) : 3]} </p>
 					<div className="about">
 						<p>	■ Right Number & Right Placement </p>
 						<p>	□ Right Number & Wrong Placement </p>
@@ -98,7 +88,7 @@ class App extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
 	wins: state.wins,
 	code: state.code,
 	history: state.history,
@@ -106,7 +96,14 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = {
 	onResetGame: resetGame,
-	submitGuess: submitGuess,
+	submitGuess,
+};
+
+App.propTypes = {
+	wins: PropTypes.number,
+	code: PropTypes.arrayOf(PropTypes.string),
+	history: PropTypes.arrayOf(PropTypes.string),
+	submitGuess: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(App);
