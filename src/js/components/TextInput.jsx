@@ -13,8 +13,8 @@ class ControlledTextInput extends React.Component {
 	}
 
 	onChangeWrapper(event) {
-		const { onChange, value } = this.props;
-		onChange(event.target.value, value);
+		const { onChange, value, name } = this.props;
+		onChange(event.target.value, value, name);
 	}
 
 	render() {
@@ -26,14 +26,14 @@ class ControlledTextInput extends React.Component {
 			required,
 			value,
 			autoFocus,
-			inputRef,
+			maxlength,
 		} = this.props;
 
 		const inputView = (
 			<input
 				name={name}
-				type="number"
-				pattern="[0-9]*"
+				type="tel"
+				pattern="\d*"
 				placeholder={placeholder}
 				size={size}
 				required={required}
@@ -41,8 +41,11 @@ class ControlledTextInput extends React.Component {
 				id={this.state.htmlID}
 				autoFocus={autoFocus}
 				autoComplete="off"
-				ref={inputRef}
+				maxLength={maxlength}
 				onChange={this.onChangeWrapper}
+				onKeyPress={(evt) => {
+					if (evt.key === 'Enter') evt.preventDefault();
+				}}
 				/>
 		);
 		const labelView = label != null ? (
@@ -66,7 +69,7 @@ ControlledTextInput.propTypes = {
 	required: PropTypes.bool,
 	value: PropTypes.string,
 	autoFocus: PropTypes.bool,
-	inputRef: PropTypes.Object,
+	maxlength: PropTypes.string,
 	onChange: PropTypes.func,
 };
 
@@ -106,9 +109,6 @@ class UncontrolledTextInput extends React.Component {
 }
 
 UncontrolledTextInput.propTypes = {
-	label: PropTypes.string,
-	placeholder: PropTypes.string,
-	disabled: PropTypes.bool,
 	value: PropTypes.string,
 	onChange: PropTypes.func,
 };
